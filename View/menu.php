@@ -9,7 +9,7 @@
          
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="index.php">Início</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="index.html">Início</a> </li>
           <li class="nav-item"> <a class="nav-link" href="feedAnimais.php">Adote</a> </li>
           <li class="nav-item"> <a class="nav-link" href="sobreNos.php">Sobre nós</a> </li>
         </ul>

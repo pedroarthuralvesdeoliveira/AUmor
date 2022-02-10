@@ -14,7 +14,7 @@
       <div class="row">
         <div class="col-lg-4 col-6 p-3">
           <ul class="list-unstyled">
-            <li> <a href="index.php" class="text-white">Início</a> </li>
+            <li> <a href="index.html" class="text-white">Início</a> </li>
             <li> <a href="feedAnimais.php" class="text-white">Adote um animal</a> </li>
             <li> <a href="cadastrarAnimal.php" class="text-white">Cadastre um animal</a> </li>
             <li> <a href="sobreNos.php" class="text-white">Sobre a AUmor</a> </li>

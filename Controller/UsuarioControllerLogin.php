@@ -20,7 +20,7 @@ session_start();
                 session_reset();
                 session_destroy();
                
-                header('Location:../View/index.php');
+                header('Location:../View/index.html');
                 
             } elseif ($_POST) {
                 $usuario->setEmail(addslashes($_POST["email"]));
