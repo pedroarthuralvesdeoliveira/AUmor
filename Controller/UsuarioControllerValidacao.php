@@ -7,6 +7,6 @@
     $dao = new UsuarioDAO($db);
     $dao->validarEmail($_REQUEST["id"], $_REQUEST['email']);
 
-    header("Location:http://localhost/ONG-AUmor/View/index.html");
+    header("Location:http://localhost/ONG-AUmor/View/index.php");
     
 ?>
