@@ -34,7 +34,6 @@ CLASS AnimalControllerEditar{
 		$dao->Editar($animal);
 
 		header('Location:../View/sucesso.php');
-		
 	}
 } 
 AnimalControllerEditar::editar();
