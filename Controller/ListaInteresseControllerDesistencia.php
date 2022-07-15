@@ -14,7 +14,6 @@ CLASS ListaInteresseControllerDesistencia{
         $lista->ApagarUsuariodaLista($_GET["idUsuario"], $_GET["idAnimal"]);
 
         header('Location:../View/usuarioAnimaisInteressados.php?idUsuario='.$_GET["idUsuario"]);
-
     }
 }
 

@@ -46,7 +46,7 @@
       </div>
     </div>
   </div>
-  <div class="py-5" style="">
+  <div class="py-5">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -79,7 +79,5 @@
     </div>
   </div>
 </body>
-
 <?php include 'footer.php'; ?>
-
 </html>

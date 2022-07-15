@@ -32,13 +32,10 @@
                 if (empty($adocaoExiste)) {
                     $dao->Inserir($_GET["idUsuario"], $_GET["idAnimal"]);
                     $daoAnimal->alterarStatusAnimal($_GET["idAnimal"], $_GET["status"]);
-                    if (empty($existeRegistro)) {
-                        //$dao->AdicionarUsuarioEmListaInteresse($_GET['idUsuario'], $_GET['idAnimal']);
-                    } else {
+                    if (!empty($existeRegistro)) {
                         $daoLista->ApagarUsuariodaLista($_GET["idUsuario"], $_GET["idAnimal"]);
-                    }
+                    } 
                 } 
-
             } 
             header('Location:../View/sucesso.php');
         }

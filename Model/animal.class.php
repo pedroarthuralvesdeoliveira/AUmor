@@ -137,6 +137,5 @@
         public function setStatusAdocao($statusAdocao){
             $this->statusAdocao = $statusAdocao;
         }
-
     }
 ?>

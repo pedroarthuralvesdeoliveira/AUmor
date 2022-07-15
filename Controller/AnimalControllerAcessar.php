@@ -1,7 +1,6 @@
 <?php
 
 CLASS AnimalControllerAcessar{
-	//Acessar todos os animais do sistema
 	public static function acessar(){
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
@@ -20,7 +19,6 @@ CLASS AnimalControllerAcessar{
 		}
 	}
 	
-	//Funcao para mostrar animais disponiveis para Adocao, que não estejam desativados ou não aprovados pelo ADM
 	public static function acessarAnimaisAtivos(){
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
@@ -55,7 +53,6 @@ CLASS AnimalControllerAcessar{
 		}
 	}
 
-	// Acessar o animal que o usuário cadastrou
 	public static function acessarAnimaldoUsuario(){
 
 		ini_set('display_errors', 1);

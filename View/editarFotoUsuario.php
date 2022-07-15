@@ -38,16 +38,10 @@ if (empty($usuario)) {
 					<label for="imagem">Imagem:</label>
 					<input class="form-control" type="file" name="imagem" required="" />
 				</div>
-
-			
-
-
 		</div>
 		<div class="row">
-
 			<div class=" col">
 				<button type="submit" class="btn btn-outline-primary">Salvar</button>
-
 				</form>
 				<a href="perfilUsuario.php"><button type="button" class="btn btn-outline-primary">Voltar</button></a>
 			</div>

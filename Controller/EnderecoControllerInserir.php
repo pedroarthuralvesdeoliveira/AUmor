@@ -20,7 +20,6 @@ CLASS EnderecoControllerInserir{
 		$endereco->setNumero($_POST["numero"]);
 		$endereco->setComplemento($_POST["complemento"]);
 		
-		
 		$dao->Inserir($endereco);
 	}
 }

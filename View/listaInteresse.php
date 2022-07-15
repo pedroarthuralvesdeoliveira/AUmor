@@ -98,7 +98,6 @@ if ($resposta == 1) {
           }
         }
       ?>
-
     </tbody>
 </table>
   </div>
@@ -121,7 +120,6 @@ if ($resposta == 1) {
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onClick="history.go(0)">Cancelar</button>
             <button type="submit" class="btn btn-success">Confirmar</button>
-            <?php // echo "<a class='btn bgAzul but' href='../Controller/ListaInteresseControllerPermissao.php?idUsuario=" . $Lista["idUsuario"] . "&idAnimal=" . $Lista["idAnimal"] . "&status=1'>Aprovar</a>";?>  
           </div>
           </form>
         </div>

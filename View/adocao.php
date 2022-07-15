@@ -5,21 +5,11 @@
     $adocaoAcessar = new AdocaoControllerAcessar();
     $adocaoAnimal = $adocaoAcessar->acessar();
     $nomeAnimal = $adocaoAcessar->nomeAnimal(); 
-    // 
     $antigosDonos = $adocaoAcessar->devolucao();
-    // print_r($antigosDonos["dataDevolucao"]);
-    // print_r($antigosDonos["idUsuarioFinal"]);
-    // echo "<pre>";
-    // print_r($antigosDonos);
-    // echo "</pre>";
-    // die();
-
     $db = new Database();
     $usuario = new UsuarioDAO($db);
     $animal = new AnimalDAO($db); 
     session_start();
-    
-   
 ?>
 
 <!DOCTYPE html>
@@ -42,23 +32,19 @@
         if (empty($antigosDonos) == false ) {
           echo "
           <tr>
-          <th scope='col' class='text-center'>Antigo(s) dono(s) do pet: </th>
-          <th scope='col' class='text-center'>Email:</th>
-          <th scope='col' class='text-center'>Telefone:</th>
-          <th scope='col' class='text-center'>Data da adoção:</th>
-          <th scope='col' class='text-center'>Data da devolução: </th>
+            <th scope='col' class='text-center'>Antigo(s) dono(s) do pet: </th>
+            <th scope='col' class='text-center'>Email:</th>
+            <th scope='col' class='text-center'>Telefone:</th>
+            <th scope='col' class='text-center'>Data da adoção:</th>
+            <th scope='col' class='text-center'>Data da devolução: </th>
           </tr>
-          ";
-        
+          ";   
     ?>
     
   </thead>
   <tbody>
     <?php
-        // $antigoDono  = $usuario->buscaUsuario($antigosDonos["idUsuarioFinal"]);
         }
-      
-
         if (empty($antigosDonos) == false ) {
         foreach ($antigosDonos as $donoAntigo){
           echo "<tr>";
@@ -74,16 +60,6 @@
   </tbody>
   <thead class="table-info">
     <tr>
-      <!-- </?php  -->
-        <!-- if (empty($antigosDonos) == false ) {
-          echo "
-          <th scope='col' class='text-center'>Antigo(s) dono(s) do pet: </th>
-          <th scope='col' class='text-center'>Email:</th>
-          <th scope='col' class='text-center'>Telefone:</th>
-          <th scope='col' class='text-center'>Data da devolução: </th>
-          ";
-        } -->
-      <!-- ?/> -->
       <th scope='col' class='text-center'>Novo dono do pet: </th>
       <th scope="col" class="text-center">Email:</th>
       <th scope="col" class="text-center">Telefone:</th>
@@ -93,20 +69,9 @@
   </thead>
   <tbody>
     <?php
-        // $antigoDono  = $usuario->buscaUsuario($antigosDonos["idUsuarioFinal"]);
         $dadosUsuario = $usuario->buscaUsuario($adocaoAnimal->idUsuarioFinal);
         $dadosAnimal = $animal->buscarAnimal($adocaoAnimal->idAnimal);
         echo "<tr>";
-
-        // if (empty($antigosDonos) == false ) {
-        // foreach ($antigoDono as $donoAntigo){
-        //   echo "<td class='text-center'>".$donoAntigo["nome"]."<br><img width='150' height='150' src='imagens/".$donoAntigo['imagem']."'</td>
-        //   <td class='text-center'>".$donoAntigo["email"]."</td>
-        //   <td class='text-center'>".$donoAntigo["telefone"]."</td>";
-        // }
-        // echo "<td class='text-center'>".$antigosDonos["dataDevolucao"]."";
-        // }  
-
         foreach ($dadosUsuario as $Usuario) {
             echo "<td class='text-center'>".$Usuario["nome"]."<br><img class=' d-block rounded-circle mt-2 mb-0 mx-auto imagemcertinha' width='100' height='100' src='imagens/".$Usuario['imagem']."'</td>
             <td class='text-center'>".$Usuario["email"]."</td>

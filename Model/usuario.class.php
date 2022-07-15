@@ -1,6 +1,5 @@
 <?php
     class Usuario{
-
         private $idUsuario;
         private $nome;
         private $sobrenome;
@@ -127,7 +126,5 @@
         public function setDescricao($descricao){
             $this->descricao = $descricao;
         }
-
     }
-
 ?>

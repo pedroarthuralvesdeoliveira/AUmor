@@ -1,14 +1,12 @@
 <?php
     session_start();
     require_once('header.php');
-
     require_once("../Controller/UsuarioControllerAcessar.php");
     $dados = new UsuarioControllerAcessar();
     $usuario = $dados->acessar();
     if (empty($usuario)) {
         header('Location:login.php');
     }
-
     require_once("../Controller/EnderecoControllerAcessar.php");
     $dadosEndereco = new EnderecoControllerAcessar();
     $endereco = $dadosEndereco->acessar();
@@ -135,15 +133,10 @@
                         <button type="button" class="btn btn-outline-primary col-sm-3 mx-1" onClick="history.go(-1)"> Voltar </button>
                         <button type="submit" class="btn btn-primary col-sm-3 mx-1">Atualizar</button>       
                     </div>
-                
-                    
                 </form>
              </div>
         </div>
     </div>
-    
-
-       
     <?php include 'footer.php'; ?>  
 </body>
 </html>

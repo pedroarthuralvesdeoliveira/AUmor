@@ -17,7 +17,6 @@ CLASS AnimalControllerInserir{
 		require_once('UsuarioControllerAcessar.php');
 		$dados = new UsuarioControllerAcessar();
 		$usuario = $dados->acessar();
-		// var_dump($usuario->idUsuario);
 
 		$animal->setIdUsuario($usuario->idUsuario);
 		$animal->setNome($_POST["nome"]);
@@ -26,24 +25,18 @@ CLASS AnimalControllerInserir{
 		$animal->setSexo($_POST["sexo"]);
 
 		if ($_POST["comportamento"] == ""){
-
 			$textComportamento = "Sem dados";
 			$animal->setComportamento($textComportamento);
-
 		} else{
-
 			$Comportamento = $_POST["comportamento"];
 			$textComportamento = implode(",", $Comportamento);
 			$animal->setComportamento($textComportamento);
-			
 		}
 	
 		if ($_POST["saude"] == "") {
 			$textSaude = "Sem dados";
 			$animal->setSaude($textSaude);
-
 		} else{
-
 			$Saude = $_POST["saude"];
 			$textSaude = implode(",", $Saude);
 			$animal->setSaude($textSaude);

@@ -27,4 +27,3 @@
 	}
 	UsuarioControllerEditar::editar();
 ?>
-<!-- https://pt.stackoverflow.com/questions/16769/usar-fun%C3%A7%C3%A3o-de-uma-classe-dentro-de-outra-classe-php -->

@@ -18,8 +18,6 @@
     if (empty($usuario)) {
       header('Location:login.php');
     }
-
-
 ?>
 
 
@@ -37,7 +35,7 @@
 
     for ($i=0; $i < count($dadosAnimal); $i++) {
 
-        echo " <h4 class='py-4 text-center'> Deseja aprovar ou desaprovar ".$dadosAnimal[$i]["nome"]." ?</h4>";
+        echo "<h4 class='py-4 text-center'> Deseja aprovar ou desaprovar ".$dadosAnimal[$i]["nome"]."?</h4>";
         echo "<div class='d-flex justify-content-center'>";
         echo "<div class='mx-1'> <a href='../Controller/AnimalControllerPermissao.php?idAnimal=".$dadosAnimal[$i]['idAnimal']."&statusAprovacao=1&idUsuario=".$dadosAnimal[$i]['idUsuario']."&nomeAnimal=".$dadosAnimal[$i]["nome"]."'><button type='button' class='btn btn-primary'>Aprovar </button></a> </div>";
         echo "<div class='mx-1'> <a href='../Controller/AnimalControllerPermissao.php?idAnimal=".$dadosAnimal[$i]['idAnimal']."&statusAprovacao=0&idUsuario=".$dadosAnimal[$i]['idUsuario']."&nomeAnimal=".$dadosAnimal[$i]["nome"]."'><button type='button' class='btn btn-danger'>Desaprovar </button></a> </div>";

@@ -1,7 +1,8 @@
 <?php
-session_start();
+	session_start();
 	CLASS UsuarioControllerInserir{
-		public static function inserir(){
+		public static function inserir() 
+		{
 			ini_set('display_errors', 1);
 			ini_set('display_startup_errors', 1);
 			error_reporting(E_ALL);
@@ -30,42 +31,41 @@ session_start();
 			$emailVerifica = $dao->verificaEmail($_POST["email"]);
 			$rg = $dao->verificaRg($_POST["rg"]);
 
-			if ($_FILES["imagem"]["size"]>0){
-			$idImagem = Date("YmdHms");
-			$extensao = explode(".", $_FILES["imagem"]["name"]);
-			$imagem = "foto".$idImagem.".".$extensao[1];
-			move_uploaded_file($_FILES["imagem"]["tmp_name"], "../View/imagens/".$imagem);
-			// header("Location:../View/sucesso.php");
+			if ($_FILES["imagem"]["size"]>0) 
+			{
+				$idImagem = Date("YmdHms");
+				$extensao = explode(".", $_FILES["imagem"]["name"]);
+				$imagem = "foto".$idImagem.".".$extensao[1];
+				move_uploaded_file($_FILES["imagem"]["tmp_name"], "../View/imagens/".$imagem);
+				$usuario->setImagem($imagem);
+			}
 
-			$usuario->setImagem($imagem);
-		}else{
-			$imagem = "imagem";
-			$usuario->setImagem($imagem);
-		}
+			$oldDados = array(
+				"nome" => $usuario->getNome(),
+				"sobrenome" => $usuario->getSobrenome(),
+				"rg" => $usuario->getRg(),
+				"telefone" => $usuario->getTelefone(),
+				"email" => $usuario->getEmail(),
+				"descricao" => $usuario->getDescricao()
+			);
 
-		$oldDados = array(
-			"nome" => $usuario->getNome(),
-			"sobrenome" => $usuario->getSobrenome(),
-			"rg" => $usuario->getRg(),
-			"telefone" => $usuario->getTelefone(),
-			"email" => $usuario->getEmail(),
-			"descricao" => $usuario->getDescricao()
-		);
-			if ($emailVerifica) {
+			if ($emailVerifica) 
+			{
 				$_SESSION['old'] = $oldDados;
 				echo "Opa, parece que já existe um e-mail como o seu! :(";
 				header("Location:../View/cadastrarUsuario.php?&e=1");
-			}else if ($rg) {
+			}
+			if ($rg)  
+			{
 				$_SESSION['old'] = $oldDados;
 				echo "Opa, parece que já existe um rg como o seu! :(";
 				header("Location:../View/cadastrarUsuario.php?&e=2");
-			}else{
-				unset($_SESSION['old']);
-				$id = $dao->Inserir($usuario);
-				header("Location:../View/sucessoCadastro.php");
-				UsuarioControllerInserir::enviarEmail($id, $email);	
 			}
 			
+			unset($_SESSION['old']);
+			$id = $dao->Inserir($usuario);
+			header("Location:../View/sucessoCadastro.php");
+			UsuarioControllerInserir::enviarEmail($id, $email);	
 		}
 
 		public static function enviarEmail($id, $email){
@@ -74,15 +74,12 @@ session_start();
 			$subject = "Validação da sua conta na AUmor! ;)";
 			$body = "Olá! Por favor, valide seu email!";
 			$body.= "<br><button><a href='http://localhost/ONG-AUmor/Controller/UsuarioControllerValidacao.php?id=".$id."&email=".$email.">Clique aqui para validar seu e-mail</a></button>";
-			// $headers  = 'MIME-Version: 1.0' . "\r\n";
-   			// $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 			$headers = "From: AUmor\'s email";
 			
 			if (mail($to_email, $subject, $body, $headers)) {
 				echo "Email enviado com sucesso para ".$to_email."";
-			} else {
+			} 
 				echo "Falha no envio do email.";
-			}
 		}
 	}
 	UsuarioControllerInserir::inserir();

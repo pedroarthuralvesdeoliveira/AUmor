@@ -17,6 +17,4 @@ CLASS EnderecoControllerApagar{
 	}
 }
 EnderecoControllerApagar::apagar();  
-
-
 ?>

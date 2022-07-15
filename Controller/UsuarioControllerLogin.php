@@ -1,5 +1,5 @@
 <?php
-session_start();
+    session_start();
     CLASS UsuarioControllerLogin{
         public static function login(){
             ini_set('display_errors', 1);
@@ -15,14 +15,15 @@ session_start();
 
             $usuario = new Usuario();
 
-            if ($_GET['acao'] == "sair") {
-                
+            if ($_GET['acao'] == "sair") 
+            {
                 session_reset();
                 session_destroy();
-               
                 header('Location:../View/index.php');
-                
-            } elseif ($_POST) {
+            }  
+            
+            if ($_POST) 
+            {
                 $usuario->setEmail(addslashes($_POST["email"]));
                 $usuario->setSenha(addslashes(md5($_POST["senha"]))); 
             }

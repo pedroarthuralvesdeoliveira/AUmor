@@ -26,12 +26,14 @@ session_start();
 <?php require_once('header.php');
 include 'menu.php';
 
-  if(isset($_GET['e'])){
-    if($_GET['e']==1){
+if(isset($_GET['e'])){
+    if($_GET['e'] == 1)
+    {
     echo "<script>alert('Seu e-mail já esta cadastrado!')</script>";
-  }else if($_GET['e']==2){
-    echo "<script>alert('Seu rg já esta cadastrado!')</script>";
-  }
+    } 
+    if($_GET['e'] == 2){
+      echo "<script>alert('Seu rg já esta cadastrado!')</script>";
+    }
 }
 ?>
 

@@ -9,16 +9,12 @@
         header('Location:login.php');
     }
 ?>  
-
-
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cadastro</title>
 </head>
 <html>
 <body>
-
-
 <?php  include 'menu.php'; ?>  
 
 <div class="py-5 text-center" >
@@ -172,15 +168,12 @@
             
             </div>
             <div class="form-group col-md-6">
-     
 
-            <!-- Fazer com que o sistema mande outro email para o usuário   -->
             <?php 
                 if ($_SESSION['statusValidacao'] != 1) {
                 echo "<button type='button' class='btn btn-primary col-md-12' data-bs-toggle='modal' data-bs-target='#modalEmail'> Cadastrar</button> ";        
-                } else {
+                } 
                 echo "<button type='submit' class='btn btn-primary col-md-12'>Cadastrar </button>";
-                }
             ?>
           </div>
         </div>
@@ -188,8 +181,6 @@
     </div>
 
     </form>
-
-      <!-- Modal -->
                     <div class="modal fade" id="modalEmail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">

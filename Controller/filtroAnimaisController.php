@@ -1,19 +1,22 @@
 <?php
+
+$porte = false;
+
 header('Content-type: text/html; charset=UTF-8');
 if ((isset($_POST['porte'])) && (!empty($_POST['porte'])) && ($_POST['porte'] != 'todos')){
     $porte = $_POST['porte'];
-}else{
-    $porte = false;
 }
+
+$sexo = false;
+
 if ((isset($_POST['sexo'])) && (!empty($_POST['sexo'])) && ($_POST['sexo'] != 'todos')){
     $sexo = $_POST['sexo'];
-}else{
-    $sexo = false;
 }
+
+$tipo = false;
+
 if ((isset($_POST['tipo'])) && (!empty($_POST['tipo'])) && ($_POST['tipo'] != 'todos')){
     $tipo = $_POST['tipo'];
-}else{
-    $tipo = false;
 }
 
 require_once('AnimalControllerAcessar.php');
@@ -42,9 +45,7 @@ if(!empty($acessarAnimais)){
         </div>
         ";
     }
-    
-    }else{
-        $resultado = "";
-    }
+}
     echo json_encode($resultado);
+    
 ?>

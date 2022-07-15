@@ -1,6 +1,4 @@
 <?php 
-
-// session_start();
 class Database{
 
 	private $host = "localhost";
@@ -24,17 +22,11 @@ class Database{
     	try{
 			$str = "mysql:host=".$this->host.";dbname=".$this->dbname;
             $this->conexao = new PDO($str, $this->username, $this->password
-            // , array(PDO::ATTR_PERSISTENT => true)
             );
-            //qualquer coisa tirar o array do PDO::ATTR_PERSISTENT
 			$this->conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}catch(PDOException $e){
 			echo "Erro na conexão: " . $e->getMessage();
         }
-
-        //$this->conexao = null;
-
     }
 }
-
 ?>

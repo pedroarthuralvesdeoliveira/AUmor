@@ -153,10 +153,8 @@
                     ':idUsuario' => $idUsuario,
                     ':idAnimal' => $idAnimal,
                 ));
-
             } catch(PDOException $e){
                 echo 'Error: '.$e->getMessage();
-
             }
         }   
     }

@@ -197,7 +197,6 @@
                     ':comportamento' => $comportamento,
                     ':saude' => $saude,
                     ':motivoAdocao' => $motivoAdocao
-                    //':status' => $status,
 				));
 			} catch(PDOException $e) {
 			  echo 'Error: ' . $e->getMessage();
@@ -206,12 +205,10 @@
 
         public function EditarFotoAnimal(Animal $animal){
 
-            // $idUsuario = $animal->getIdUsuario();
             $idAnimal = $animal->getIdAnimal();
             $imagem = $animal->getImagem();
             try {
                 $stmt = $this->db->getConnection()->prepare('UPDATE animal SET imagem = :imagem WHERE idAnimal = :idAnimal');
-                // AND idUsuario = :idUsuario
                 $stmt->execute(array(
                     ':imagem' => $imagem,
                     ':idAnimal' => $idAnimal

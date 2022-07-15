@@ -13,7 +13,6 @@
 			$dao = new AnimalDAO($db);
 			$animal = new Animal();
 
-            // $animal->setIdUsuario($_POST["idUsuario"]);
 			$animal->setIdAnimal($_POST["idAnimal"]);
 
 			$id = Date("YmdHms");

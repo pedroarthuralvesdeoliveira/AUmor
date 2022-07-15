@@ -15,17 +15,15 @@ $acessarAnimal = $animal->acessar();
 
 $dados = new UsuarioControllerAcessar();
 $usuario = $dados->acessar();
-if (empty($usuario)) {
-  header('Location:login.php');
-} else {
-  if ($_SESSION['tipoUser'] == 0) {
-    header('Location:listarAnimaldoUsuario.php');
-  }
+
+if ($_SESSION['tipoUser'] == 0) {
+  header('Location:listarAnimaldoUsuario.php');
 }
 
+if (empty($usuario)) {
+  header('Location:login.php');
+} 
 ?>
-
-
 <!DOCTYPE html>
 <html>
 
@@ -33,11 +31,7 @@ if (empty($usuario)) {
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
   <title>Listar Animais</title>
-
-
   <script type="text/javascript">
     var novo = "";
 
@@ -57,33 +51,26 @@ if (empty($usuario)) {
     }
 
     function listarAprovacao() {
-
       var filtro = document.getElementById('filtro-aprovacao');
       var tabela = document.getElementById('lista');
       if (filtro.value == 'todos') {
         document.location.reload(true);
-      } else {
-        var nomeFiltro = filtro.value;
-        var novo = nomeFiltro.toLowerCase();
+      } 
+      var nomeFiltro = filtro.value;
+      var novo = nomeFiltro.toLowerCase();
 
-        for (var i = 1; i < tabela.rows.length; i++) {
-          var conteudoCelula = tabela.rows[i].cells[4].innerText;
-          var conteudoCelula = conteudoCelula.toLowerCase();
-          if (conteudoCelula == novo) {
-            tabela.rows[i].style.display = '';
-          } else {
-            tabela.rows[i].style.display = 'none';
-          }
-          // var corresponde = conteudoCelula.indexOf(novo) >= 0;
-          // tabela.rows[i].style.display = corresponde ? '' : 'none';
-        }
+      for (var i = 1; i < tabela.rows.length; i++) 
+      {
+        var conteudoCelula = tabela.rows[i].cells[4].innerText;
+        var conteudoCelula = conteudoCelula.toLowerCase();
+        if (conteudoCelula == novo) {
+          tabela.rows[i].style.display = '';
+        } 
+        tabela.rows[i].style.display = 'none';
       }
-    }
-
-    
+    }    
   </script>
 </head>
-
 <body>
   <?php require_once('header.php'); ?>
   <?php include 'menu.php'; ?>
@@ -123,51 +110,25 @@ if (empty($usuario)) {
                 <tbody>
                   <?php
                   for ($i = 0; $i < count($acessarAnimal); $i++) {
-                    // echo "<br>";
-                    // print_r($acessarAnimal[$i]["nome"]);
-                    // echo "<br>";
-
-                    // $data = explode(" ", $acessarAnimal[$i]['dataInscricao']);
-                    // $soData = explode("-", $data[0]);
-
                     $acessarUsuario = $dao->acessarNome($acessarAnimal[$i]["idUsuario"]);
 
                     echo "<tr>";
-
                     echo "<td><img class='d-block rounded-circle mt-2 mb-0 mx-auto imagemcertinha' src=imagens/" . $acessarAnimal[$i]["imagem"] . " width= '50px' height='50' ></td>";
-
                     echo "<td><a href='perfilAnimal.php?id=" . $acessarAnimal[$i]["idAnimal"] . "'>" . $acessarAnimal[$i]["nome"] . "</a></td>";
-
                     echo "<td>" . $acessarUsuario["nome"] . "</td>";
-
-                    // <td>".$acessarAnimal[$i]["tipo"]."</td>
-                    // <td>".$acessarAnimal[$i]["porte"]."</td>
-                    // <td>".$acessarAnimal[$i]["sexo"]."</td>
-
                     if ($acessarAnimal[$i]["statusAdocao"] == 0) {
                       echo "<td>Não adotado</td>";
-                    } else {
+                    } 
                       echo "<td>Adotado</td>";
-                    }
-
-
-                    // echo "<td>" . $soData[2] . "/" . $soData[1] . "/" . $soData[0] . "</td>";
-
                     if ($acessarAnimal[$i]["StatusAprovacao"] == "") {
                       echo "<td class='txAzul'>Em análise</td>";
-                    } else if ($acessarAnimal[$i]["StatusAprovacao"] == 0) {
+                    } 
+                    if ($acessarAnimal[$i]["StatusAprovacao"] == 0) {
                       echo "<td class='txAzul'> Desaprovado </td>";
-                    } else {
-                      echo "<td class='txAzul'> Aprovado </td>";
-                    }
-
-
+                    } 
+                    echo "<td class='txAzul'> Aprovado </td>";
                     echo "<td > <a href='AprovacaoAdm.php?id=" . $acessarAnimal[$i]["idAnimal"] . "'> Alterar </a> </td>";
-
-
-
                   ?>
-
                   <?php } ?>
                 </tbody>
               </table>
@@ -176,12 +137,8 @@ if (empty($usuario)) {
         </div>
       </div>
     </div>
-
     <a href="perfilUsuarioAdmin.php"><button type="button" class="btn btn-outline-primary"> Voltar</button></a>
-
   </div>
   <?php include 'footer.php'; ?>
-
 </body>
-
 </html>

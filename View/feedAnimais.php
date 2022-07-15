@@ -83,11 +83,8 @@ $acessarAnimal = $animal->acessarAnimaisAtivos();
   </style>
 
 </head>
-
 <body>
-
   <?php require_once('header.php'); ?>
-
   <?php include 'menu.php'; ?>
   <div class="container py-3">
     <h1 class="py-4 text-center">Animais disponíveis para adoção</h1>
@@ -124,22 +121,13 @@ $acessarAnimal = $animal->acessarAnimaisAtivos();
     </div>
   </div>
   <div class="container">
-
-
     <div class="row m-5" id="animalView">
       <?php for ($i = 0; $i < count($acessarAnimal); $i++) { ?>
-
         <!-- CONTAINER -->
-
         <div class="col-lg-4 col-sm-4 col-6">
           </br>
-
-
-
           <div class="hoverzoom">
             <?php echo "<img class='imagemcertinha' src=imagens/" . $acessarAnimal[$i]["imagem"] . " width='100%'  height= '200px' >" ?>
-
-
             <div class="card-body mt-3 mb-0">
               <div class="retina">
                 <?php
@@ -148,19 +136,12 @@ $acessarAnimal = $animal->acessarAnimaisAtivos();
               </div>
             </div>
           </div>
-
-
         </div>
-
-
       <?php } ?>
     </div>
-
     <div class=" py-2 container"></div>
     <button type="button" class="btn btn-outline-primary" onClick="history.go(-1)">Voltar</button>
   </div>
-
-
 </body>
 <script type='text/javascript' src='filtro.js'></script>
 <?php include 'footer.php'; ?>

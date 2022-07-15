@@ -1,32 +1,25 @@
 <?php
 session_start();
-
 require_once('../Controller/ListaInteresseControllerAcessar.php');
 $usuario = new ListaInteresseControllerAcessar();
 $dados = $usuario->buscarUsuario();
-
 require_once('../DAO/animaldao.class.php');
 $db = new Database();
 $animalBusca = new AnimalDAO($db);
-
 if (empty($dados)) {
   $resposta = 1;
-} else {
+} 
   $resposta = 0;
-}
-
 ?>
 <!DOCTYPE html>
 <html>
 <title>Animais de seu interesse</title>
 <?php require_once('header.php'); ?>
-
 <script>
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
 </script>
-
 <?php include 'menu.php'; ?>
 <?php
 if ($resposta == 1) {
@@ -43,7 +36,9 @@ if ($resposta == 1) {
       </div>
     </div>
   </div>";
-} else {
+} 
+if ($resposta != 1)
+{
 ?>
   <div class="container">
     <table id="lista" class="table table-bordered" border="1">
@@ -57,11 +52,9 @@ if ($resposta == 1) {
       </thead>
       <tbody>
         <?php
-
         foreach ($dados as $Lista) {
           $data = explode(" ", $Lista['dataInteresse']);
           $soData = explode("-", $data[0]);
-
           $dadosAnimal = $animalBusca->buscarAnimal($Lista["idAnimal"]);
           echo "<tr>";
           foreach ($dadosAnimal as $animal) {
@@ -70,37 +63,17 @@ if ($resposta == 1) {
             echo "<td class='text-center'><a class='text-center'  href='../Controller/ListaInteresseControllerDesistencia.php?idUsuario=" . $Lista["idUsuario"] . "&idAnimal=" . $animal["idAnimal"] . "'><button class='btn btn-outline-danger'> Cancelar </button></a></td>";
           }
         }
-
         ?>
       </tbody>
     </table>
   </div>
-  <!-- Modal -->
-  <!-- <div class="modal fade" id="modalCerteza" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja continuar?</h5>
-            
-          </div>
-          <div class="modal-body">
-           Ao cancelar sua solicitação de adoção você será retirado da lista de interesse de <?php echo $animal["nome"] ?>. Deseja continuar?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-
-            <?php echo "<a class='btn bgAzul but'  href='../Controller/ListaInteresseControllerDesistencia.php?idUsuario=" . $Lista["idUsuario"] . "&idAnimal=" . $animal["idAnimal"] . "'>Confirmar</a>"; ?>  
-          </div>
+  <?php echo "<a class='btn bgAzul but'  href='../Controller/ListaInteresseControllerDesistencia.php?idUsuario=" . $Lista["idUsuario"] . "&idAnimal=" . $animal["idAnimal"] . "'>Confirmar</a>"; ?>  
+        </div>
         </div>
       </div>
     </div> -->
-
-    
-
-
   <?php
   include 'footer.php';
   ?>
 <?php  } ?>
-
 </html>

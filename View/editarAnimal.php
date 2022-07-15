@@ -71,7 +71,6 @@ include 'menu.php';
           <label>Comportamento</label>
           <?php
           $vet = explode(',', $acessarAnimal->comportamento);
-          // var_dump(array_search("ativo", $vet));
           ?>
           <div>
             <?php
@@ -234,7 +233,6 @@ include 'menu.php';
           <label>Saúde</label>
           <?php
           $saude = explode(',', $acessarAnimal->saude);
-          // var_dump(array_search("ativo", $vet));
           ?>
           <?php
           $vermifugado = '';
@@ -285,13 +283,7 @@ include 'menu.php';
 
   </div>
 
-
-
-
-
-
   </div>
 </body>
 <?php include 'footer.php'; ?>
-
 </html>
