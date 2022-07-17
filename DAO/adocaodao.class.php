@@ -1,6 +1,5 @@
 <?php
     require_once("../Model/adocao.class.php");
-    
     class AdocaoDAO {
 
         private $db;
@@ -64,7 +63,6 @@
     
         public function dadosAdocao($idAnimal){
             $animal = $idAnimal; 
-
             try {
                 $sql = "SELECT * FROM adocao WHERE idAnimal = :animal AND status = 0";
                 $stmt = $this->db->getConnection()->prepare($sql);
@@ -80,9 +78,7 @@
         }
 
         public function dadosDevolucao($idAnimal){
-
             $animal = $idAnimal; 
-
             try {
                 $sql = "SELECT a.*, b.* FROM adocao a,usuario b WHERE a.idAnimal = :animal AND a.idUsuarioFinal= b.idUsuario AND status = 1";
                 $stmt = $this->db->getConnection()->prepare($sql);
@@ -118,7 +114,6 @@
         }
 
         public function Editar(Adocao $result){
-
 		    $idAdocao = $result->getIdAdocao();
             $dataAdocao = $result->getDataAdocao();
             $dataDevolucao = $result->getDataDevolucao();
@@ -141,7 +136,6 @@
 		}
 
         public function Inserir($id, $idA){
-
             try{
                 $idUsuario = $id;
                 $idAnimal = $idA;
