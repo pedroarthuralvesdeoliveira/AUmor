@@ -1,15 +1,15 @@
 <?php
 
+require_once('../Model/adocao.class.php');
+require_once('../DAO/adocaodao.class.php');
+require_once('../Config/database.class.php');
+
 class AdocaoController
 {
     public function acessar(){
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
-
-		require_once('../Model/adocao.class.php');
-		require_once('../DAO/adocaodao.class.php');
-		require_once('../Config/database.class.php');
 
 		$db = new Database();
 		$dao = new AdocaoDAO($db);
@@ -24,10 +24,6 @@ class AdocaoController
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
 
-		require_once('../Model/adocao.class.php');
-		require_once('../DAO/adocaodao.class.php');
-		require_once('../Config/database.class.php');
-
 		$db = new Database();
 		$dao = new AdocaoDAO($db);
 
@@ -41,13 +37,9 @@ class AdocaoController
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
 
-        require_once('../Model/adocao.class.php');
-        require_once('../DAO/adocaodao.class.php');
 
         require_once('../Model/animal.class.php');
         require_once('../DAO/animaldao.class.php');
-
-        require_once('../Config/database.class.php');
 
         $db = new Database();
 
@@ -70,10 +62,6 @@ class AdocaoController
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
-
-		require_once('../Model/adocao.class.php');
-		require_once('../DAO/adocaodao.class.php');
-		require_once('../Config/database.class.php');
 
 		$db = new Database();
 		$dao = new AdocaoDAO($db);

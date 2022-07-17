@@ -1,5 +1,6 @@
 <?php
     class Adocao{
+        
         private $idAdocao;
         private $idUsuario;
         private $idAnimal;

@@ -1,6 +1,9 @@
 <?php
 
 session_start();
+require_once('../Config/database.class.php');
+require_once('../Model/usuario.class.php');
+require_once('../DAO/usuariodao.class.php');
 
 class UsuarioController
 {
@@ -8,10 +11,6 @@ class UsuarioController
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
-
-        require_once('../Model/usuario.class.php');
-        require_once('../DAO/usuariodao.class.php');
-        require_once('../Config/database.class.php');
 
         $db = new Database();
         $dao = new UsuarioDAO($db);
@@ -27,10 +26,6 @@ class UsuarioController
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
 
-        require_once('../Model/usuario.class.php');
-        require_once('../DAO/usuariodao.class.php');
-        require_once('../Config/database.class.php');
-
         $db = new Database();
         $dao = new UsuarioDAO($db);
         $usuario = new Usuario();
@@ -44,10 +39,6 @@ class UsuarioController
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
-
-		require_once('../Model/usuario.class.php');
-		require_once('../DAO/usuariodao.class.php');
-		require_once('../Config/database.class.php');
 
 		$db = new Database();
 		$dao = new UsuarioDAO($db);
@@ -63,10 +54,6 @@ class UsuarioController
         error_reporting(E_ALL);
 
         require_once('EnderecoControllerEditar.php');
-
-        require_once('../Model/usuario.class.php');
-        require_once('../DAO/usuariodao.class.php');
-        require_once('../Config/database.class.php');
 
         $db = new Database();
         $dao = new UsuarioDAO($db);
@@ -86,10 +73,6 @@ class UsuarioController
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
-
-        require_once('../Model/usuario.class.php');
-        require_once('../DAO/usuariodao.class.php');
-        require_once('../Config/database.class.php');
 
         $db = new Database();
         $dao = new UsuarioDAO($db);
@@ -130,10 +113,6 @@ class UsuarioController
 		error_reporting(E_ALL);
 		
 		require_once('enderecoControllerInserir.php');
-
-		require_once('../Model/usuario.class.php');
-		require_once('../DAO/usuariodao.class.php');
-		require_once('../Config/database.class.php');
 
 		$db = new Database();
 			
@@ -188,18 +167,13 @@ class UsuarioController
 		unset($_SESSION['old']);
 		$id = $dao->Inserir($usuario);
 		header("Location:../View/sucessoCadastro.php");
-		UsuarioControllerInserir::enviarEmail($id, $email);	
+		$this->enviarEmail($id, $email);	
 	}
 
     public function login(){
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
-        error_reporting(E_ALL);
-        
-        require_once('../Model/usuario.class.php');
-        require_once('../DAO/usuariodao.class.php');
-        require_once('../Config/database.class.php');
-        
+        error_reporting(E_ALL); 
         $db = new Database();
         $dao = new UsuarioDAO($db);
 
@@ -225,14 +199,19 @@ class UsuarioController
 
     public function validacao()
     {
-        require_once("../Config/database.class.php");
-        require_once("../DAO/usuariodao.class.php");
-
         $db = new Database();
         $dao = new UsuarioDAO($db);
         $dao->validarEmail($_REQUEST["id"], $_REQUEST['email']);
 
         header("Location:http://localhost/ONG-AUmor/View/index.php");
+    }
+    
+    private function verificarLogin(){
+        return false;
+    
+        if(isset($_SESSION['idUsuario'])){
+            return true;
+        }
     }
 }
 

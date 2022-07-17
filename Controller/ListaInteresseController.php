@@ -1,15 +1,15 @@
 <?php
 
+require_once('../Model/ListaInteresse.class.php');
+require_once('../DAO/listaInteressedao.class.php');
+require_once('../Config/database.class.php');
+
 class ListaInteresseController
 {
     public function acessar(){
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
-
-		require_once('../Model/ListaInteresse.class.php');
-		require_once('../DAO/listaInteressedao.class.php');
-		require_once('../Config/database.class.php');
 
 		$db = new Database();
 		$dao = new ListaInteresseDAO($db);
@@ -21,10 +21,6 @@ class ListaInteresseController
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
-
-		require_once('../Model/ListaInteresse.class.php');
-		require_once('../DAO/listaInteressedao.class.php');
-		require_once('../Config/database.class.php');
 
 		$db = new Database();
 		$dao = new ListaInteresseDAO($db);
@@ -39,10 +35,6 @@ class ListaInteresseController
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
 
-		require_once('../Model/ListaInteresse.class.php');
-		require_once('../DAO/listaInteressedao.class.php');
-		require_once('../Config/database.class.php');
-
 		$db = new Database();
 		$dao = new ListaInteresseDAO($db);
 
@@ -55,10 +47,6 @@ class ListaInteresseController
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
-
-		require_once('../Model/ListaInteresse.class.php');
-		require_once('../DAO/listaInteressedao.class.php');
-		require_once('../Config/database.class.php');
 
 		$db = new Database();
 		$dao = new ListaInteresseDAO($db);
@@ -73,8 +61,6 @@ class ListaInteresseController
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
 
-        require_once('../DAO/listaInteressedao.class.php');
-        require_once('../Config/database.class.php');
         $db = new Database();
         $lista = new ListaInteresseDAO($db);
 
@@ -87,10 +73,6 @@ class ListaInteresseController
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
-
-        require_once('../Model/listaInteresse.class.php');
-        require_once('../DAO/listaInteressedao.class.php');
-        require_once('../Config/database.class.php');
         
         $db = new Database();
         $dao = new ListaInteresseDAO($db);
@@ -119,11 +101,6 @@ class ListaInteresseController
 
         require_once('../Model/animal.class.php');
         require_once('../DAO/animaldao.class.php');
-
-        require_once('../Model/listaInteresse.class.php');
-        require_once('../DAO/listaInteressedao.class.php');
-
-        require_once('../Config/database.class.php');
 
         $db = new Database();
 
