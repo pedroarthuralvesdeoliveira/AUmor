@@ -19,9 +19,7 @@ if ((isset($_POST['tipo'])) && (!empty($_POST['tipo'])) && ($_POST['tipo'] != 't
     $tipo = $_POST['tipo'];
 }
 
-require_once('AnimalControllerAcessar.php');
-
-$animal = new AnimalControllerAcessar(); 
+$animal = new AnimalController(); 
 $acessarAnimais = $animal->FiltrarAnimais($porte, $sexo, $tipo);
 $resultado = "";
 

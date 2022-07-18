@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once('../Controller/AnimalControllerAcessar.php');
-$animal = new AnimalControllerAcessar();
+require_once('../Controller/AnimalController.php');
+$animal = new AnimalController();
 $acessarAnimal = $animal->acessarAnimaisAtivos();
 
 ?>

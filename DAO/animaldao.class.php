@@ -6,7 +6,6 @@
 
 		public function __construct(Database $db){
 			$this->db = $db;
-
         }
 
         public function Acessar(Animal $resultado){
@@ -31,7 +30,7 @@
 
             try{
                     $resultado = array();
-                    $sql = "SELECT * FROM animal WHERE StatusDesativar = 0 AND  StatusAprovacao = 1 AND statusAdocao = 0";
+                    $sql = "SELECT * FROM animal WHERE StatusDesativar = 0 AND  StatusAprovacao = 1 AND status = 0";
                     $stmt = $this->db->getConnection()->prepare($sql);
 
                     $stmt->execute();
@@ -48,7 +47,7 @@
         public function acessarAnimaisAtivosDeOutroUsuario(Animal $resultado){
             try{
                 $resultado = array();
-                $sql = "SELECT * FROM animal WHERE StatusDesativar = 0 AND  StatusAprovacao = 1 AND statusAdocao = 0 AND idUsuario != ".$_SESSION['idUsuario'];
+                $sql = "SELECT * FROM animal WHERE StatusDesativar = 0 AND  StatusAprovacao = 1 AND status = 0 AND idUsuario != ".$_SESSION['idUsuario'];
                 $stmt = $this->db->getConnection()->prepare($sql);
 
                 $stmt->execute();
@@ -124,7 +123,7 @@
             $idAnimal = $id;
 
             try {
-                $sql = 'UPDATE animal SET statusAdocao = :status WHERE idAnimal = :idAnimal';
+                $sql = 'UPDATE animal SET status = :status WHERE idAnimal = :idAnimal';
                 
                 $stmt = $this->db->getConnection()->prepare($sql);
                 
@@ -218,6 +217,32 @@
                 echo 'Error: ' . $e->getMessage();
             }
 
+        }
+
+        public function FiltrarAnimais($porte, $sexo, $tipo){
+            $db = new Database();
+            try{
+                $resultado = array();
+                $sql = "SELECT * FROM animal WHERE StatusDesativar = 0 AND  StatusAprovacao = 1";
+                if ($porte){
+                    $sql .= " AND porte = '" . $porte . "'";
+                }
+                if ($sexo){
+                    $sql .= " AND sexo = '" . $sexo . "'";
+                }
+                if ($tipo){
+                    $sql .= " AND tipo = '" . $tipo . "'";
+                }
+                $stmt = $db->getConnection()->prepare($sql);
+    
+                $stmt->execute();
+    
+                $resultado = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $resultado = $stmt->fetchAll();
+            }catch (PDOException $e){
+                echo "Erro: " . $e->getMessage();
+            }
+            return $resultado;
         }
 
         public function Inserir(Animal $animal){

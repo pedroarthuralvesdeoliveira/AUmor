@@ -1,15 +1,14 @@
 <?php
 
+require_once('../Config/database.class.php');
+require_once('../DAO/animaldao.class.php');
+
 class AnimalController
 {
     public function acessar(){
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
-
-		require_once('../Model/animal.class.php');
-		require_once('../DAO/animaldao.class.php');
-		require_once('../Config/database.class.php');
 
 		$db = new Database();
 		$dao = new AnimalDAO($db);
@@ -25,10 +24,6 @@ class AnimalController
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
 
-		require_once('../Model/animal.class.php');
-		require_once('../DAO/animaldao.class.php');
-		require_once('../Config/database.class.php');
-
 		$db = new Database();
 		$dao = new AnimalDAO($db);
 		$animal = new Animal();
@@ -40,10 +35,6 @@ class AnimalController
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
-
-		require_once('../Model/animal.class.php');
-		require_once('../DAO/animaldao.class.php');
-		require_once('../Config/database.class.php');
 
 		$db = new Database();
 		$dao = new AnimalDAO($db);
@@ -59,10 +50,6 @@ class AnimalController
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
 
-		require_once('../Model/animal.class.php');
-		require_once('../DAO/animaldao.class.php');
-		require_once('../Config/database.class.php');
-
 		$db = new Database();
 		$dao = new AnimalDAO($db);
 		$animal = new Animal();
@@ -75,10 +62,6 @@ class AnimalController
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
-
-		require_once('../Model/animal.class.php');
-		require_once('../DAO/animaldao.class.php');
-		require_once('../Config/database.class.php');
 
 		$db = new Database();
 		$dao = new AnimalDAO($db);
@@ -93,10 +76,6 @@ class AnimalController
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
-
-		require_once('../Model/animal.class.php');
-		require_once('../DAO/animaldao.class.php');
-		require_once('../Config/database.class.php');
 
 		$db = new Database();
 		$dao = new AnimalDAO($db);
@@ -113,10 +92,6 @@ class AnimalController
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
 
-		require_once('../Model/animal.class.php');
-		require_once('../DAO/animaldao.class.php');
-		require_once('../Config/database.class.php');
-
 		$db = new Database();
 		$dao = new AnimalDAO($db);
 
@@ -130,10 +105,6 @@ class AnimalController
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
 
-		require_once('../Model/animal.class.php');
-		require_once('../DAO/animaldao.class.php');
-		require_once('../Config/database.class.php');
-		
 		$db = new Database();
 		$dao = new AnimalDAO($db);
 		$animal = new Animal();
@@ -165,10 +136,6 @@ class AnimalController
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
-
-        require_once('../Model/animal.class.php');
-        require_once('../DAO/animaldao.class.php');
-        require_once('../Config/database.class.php');
 
         $db = new Database();
         $dao = new AnimalDAO($db);
@@ -213,41 +180,20 @@ class AnimalController
     }
 
 	public function FiltrarAnimais($porte, $sexo, $tipo){
-		require_once('../Config/database.class.php');
-		$db = new Database();
-
 		try{
-			$resultado = array();
-			$sql = "SELECT * FROM animal WHERE StatusDesativar = 0 AND  StatusAprovacao = 1";
-			if ($porte){
-				$sql .= " AND porte = '" . $porte . "'";
-			}
-			if ($sexo){
-				$sql .= " AND sexo = '" . $sexo . "'";
-			}
-			if ($tipo){
-				$sql .= " AND tipo = '" . $tipo . "'";
-			}
-			$stmt = $db->getConnection()->prepare($sql);
-
-			$stmt->execute();
-
-			$resultado = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-			$resultado = $stmt->fetchAll();
+			$db = new Database();
+			$dao = new AnimalDAO($db);
+			$dao->FiltrarAnimais($porte, $sexo, $tipo);
 		}catch (PDOException $e){
 			echo "Erro: " . $e->getMessage();
 		}
-		return $resultado;
+		return $dao;
 	}
 
     public function inserir(){
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
-
-		require_once('../Model/animal.class.php');
-		require_once('../DAO/animaldao.class.php');
-		require_once('../Config/database.class.php');
 
 		$db = new Database();
 		$dao = new AnimalDAO($db);
@@ -301,15 +247,9 @@ class AnimalController
 	}
 
     public function permitir(){
-
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
-
-        require_once('../Model/usuario.class.php');
-        require_once('../DAO/usuariodao.class.php');
-        require_once('../DAO/animaldao.class.php');
-        require_once('../Config/database.class.php');
 
         $db = new Database();
         $daoUsuario = new UsuarioDAO($db);
@@ -323,9 +263,8 @@ class AnimalController
 
             if ($_GET["statusAprovacao"] == "1") {
                 AnimalControllerPermissao::enviarEmailDeAprovacaoDoAnimal($email, $nomeAnimal);
-            } else {
-                AnimalControllerPermissao::enviarEmailDeDesaprovacaoDoAnimal($email, $nomeAnimal);
             }
+            AnimalControllerPermissao::enviarEmailDeDesaprovacaoDoAnimal($email, $nomeAnimal);
             header('Location:../View/listarAnimal.php');
         } 
     }
