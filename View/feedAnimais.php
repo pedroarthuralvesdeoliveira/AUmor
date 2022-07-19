@@ -3,7 +3,6 @@ session_start();
 require_once('../Controller/AnimalController.php');
 $animal = new AnimalController();
 $acessarAnimal = $animal->acessarAnimaisAtivos();
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -145,5 +144,4 @@ $acessarAnimal = $animal->acessarAnimaisAtivos();
 </body>
 <script type='text/javascript' src='filtro.js'></script>
 <?php include 'footer.php'; ?>
-
 </html>

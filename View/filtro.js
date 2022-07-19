@@ -1,12 +1,12 @@
 $('#filtrarAnimais').submit(function(e){
     e.preventDefault();
-    sexo=$('#sexo').val();
-    tipo=$('#tipo').val();
-    porte=$('#porte').val();
+    sexo = $('#sexo').val();
+    tipo = $('#tipo').val();
+    porte = $('#porte').val();
     $.ajax({
         url: '../Controller/filtroAnimaisController.php',
         type: 'POST',
-        data: {tipo: tipo, sexo: sexo, porte: porte},
+        data: {tipo, sexo, porte},
         dataType: 'json',
         success: function(response){
           $('#animalView').html("");

@@ -37,9 +37,7 @@ if(!empty($acessarAnimais)){
                         <td><a href='perfilAnimal.php?id=".$acessarAnimal['idAnimal']."'>".$acessarAnimal['nome']."</a>
                     </div>
                 </div>
-              
-            </div>
-
+            </div
         </div>
         ";
     }
