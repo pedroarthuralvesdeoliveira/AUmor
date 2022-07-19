@@ -94,9 +94,9 @@
                 return $dados;
         }
 
-        public function devolucaoAnimal($id, $statusAdocao, Adocao $adocao){
+        public function devolucaoAnimal($id, $status, Adocao $adocao){
             $idAnimal = $id;
-            $status = $statusAdocao;
+            $status = $status;
             $dataDevolucao = $adocao->getDataDevolucao();
             try {
 

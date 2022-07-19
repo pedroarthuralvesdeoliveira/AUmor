@@ -23,8 +23,8 @@
 
             $daoAnimal = new AnimalDAO($db);
 
-            if (isset($_GET["idAnimal"]) && isset($_GET["status"]) && isset($_GET["statusAdocao"])) {
-                $dao->devolucaoAnimal($_GET["idAnimal"], $_GET["statusAdocao"], $adocao);
+            if (isset($_GET["idAnimal"]) && isset($_GET["status"]) && isset($_GET["status"])) {
+                $dao->devolucaoAnimal($_GET["idAnimal"], $_GET["status"], $adocao);
                 $daoAnimal->alterarStatusAnimal($_GET["idAnimal"], $_GET["status"]);                
             }
 
