@@ -206,7 +206,7 @@ class UsuarioController
         header("Location:http://localhost/ONG-AUmor/View/index.php");
     }
     
-    private function verificarLogin(){
+    public function verificarLogin(){
         return false;
     
         if(isset($_SESSION['idUsuario'])){

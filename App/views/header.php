@@ -1,5 +1,7 @@
 <?php
-include '../Controller/Functions.php';
+require_once('../controllers/UsuarioController.php');
+$usuario = new UsuarioController();
+$usuario->verificarLogin();
 ?>
 <!doctype html>
 <html lang="en">

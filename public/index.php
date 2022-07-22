@@ -33,14 +33,13 @@
 </style>
 
 <body>
-
-
-
   <?php
+
+  require_once('../vendor/autoload.php');
 
   session_start();
 
-  require_once('header.php'); ?>
+  require_once('../App/Views/header.php'); ?>
 
   <?php include 'menu.php'; ?>
 
