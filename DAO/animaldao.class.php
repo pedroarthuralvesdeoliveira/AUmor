@@ -1,6 +1,7 @@
 <?php
-    namespace App\DAO;
-    class AnimalDAO {
+    namespace DAO;
+    class AnimalDAO 
+    {
         private $db;
 
 		public function __construct(\Config\Database $db)

@@ -1,5 +1,5 @@
 <?php
-    namespace App\DAO;
+    namespace DAO;
     CLASS ListaInteresseDAO
     {    
         private $db;

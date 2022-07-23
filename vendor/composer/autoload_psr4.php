@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\' => array($baseDir . '/aumor'),
+    'Composer\\Semver\\' => array($vendorDir . '/composer/semver/src'),
+    'App\\' => array($baseDir . '/App'),
     'AU\\' => array($vendorDir . '/AU'),
 );

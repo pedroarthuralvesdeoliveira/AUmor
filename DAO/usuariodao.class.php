@@ -1,5 +1,5 @@
 <?php
-    namespace App\DAO;
+    namespace DAO;
     class UsuarioDAO
     {
         private $db;
@@ -8,7 +8,7 @@
 			$this->db = $db;
         }
 
-        public function Acessar()
+        public function acessar()
         {
             $idUsuario = $_SESSION['idUsuario'];
             try
@@ -25,7 +25,7 @@
             return $dados;
         }
 
-        public function AcessarNome($id)
+        public function acessarNome($id)
         {
             $idUsuario = $id;
             try
@@ -101,7 +101,7 @@
             return $dados;
         }
 
-        public function Desativar($id)
+        public function desativar($id)
         {
             $idUsuario = $id;
             $status = 0;
@@ -119,26 +119,7 @@
     		}
         }
 
-        public function EsqueceuSenha(\App\Models\Usuario $usuario)
-        {
-            $email = $usuario->getEmail();
-            try 
-            {
-                $sql = 'SELECT senha FROM usuario WHERE email = :email';
-                $stmt = $this->db->getConnection()->prepare($sql);
-                $stmt->execute(array(
-                    ':email' => $email
-                ));
-                $dados = $stmt->fetch(\PDO::FETCH_OBJ);
-            } 
-            catch(\PDOException $e) 
-            {
-                echo 'Error: ' . $e->getMessage();
-            }
-            return $dados;
-        }
-
-        public function Editar(\App\Models\Usuario $usuario)
+        public function editar(\App\Models\Usuario $usuario)
         {
             $idUsuario = $usuario->getIdUsuario();
             $nome = $usuario->getNome();
@@ -162,7 +143,7 @@
             }
         }
 
-        public function EditarFoto(\App\Models\Usuario $usuario)
+        public function editarFoto(\App\Models\Usuario $usuario)
         {
             $idUsuario = $usuario->getIdUsuario();
             $imagem = $usuario->getImagem();
@@ -179,7 +160,7 @@
             }
         }
 
-        public function Inserir(\App\Models\Usuario $usuario)
+        public function inserir(\App\Models\Usuario $usuario)
         {
             try
             {
@@ -224,7 +205,7 @@
             }
         }
 
-        public function Login(\App\Models\Usuario $usuario)
+        public function login(\App\Models\Usuario $usuario)
         {
             try
             {
@@ -277,6 +258,25 @@
             {
                 echo "Erro: " . $e->getMessage();
             }
+        }
+
+        public function recuperarSenha(\App\Models\Usuario $usuario)
+        {
+            $email = $usuario->getEmail();
+            try 
+            {
+                $sql = 'SELECT senha FROM usuario WHERE email = :email';
+                $stmt = $this->db->getConnection()->prepare($sql);
+                $stmt->execute(array(
+                    ':email' => $email
+                ));
+                $dados = $stmt->fetch(\PDO::FETCH_OBJ);
+            } 
+            catch(\PDOException $e) 
+            {
+                echo 'Error: ' . $e->getMessage();
+            }
+            return $dados;
         }
 
         public function validarEmail($id, $email)

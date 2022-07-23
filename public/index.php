@@ -40,10 +40,9 @@
 
   session_start();
 
-  require_once('../App/views/header.php'); ?>
+  require_once('/App/views/header.php'); ?>
 
-  <?php include 'menu.php'; ?>
-
+  <?php include 'App/views/menu.php'; ?>
   <div class="py-5 align-items-center d-flex bgAzul">
     <div class="container py-5 bgAzul">
       <div class="row">
@@ -51,14 +50,10 @@
           <div class="position-absolute bottom-0 end-0 swing"></div>
           <h1 class="display-3 mb-4 d-flex justify-content-center text-white " style="white-space: nowrap"> Adote um amigo</h1>
           <div class="d-flex justify-content-center"> </div>
-
-
           <div class="position-absolute top-50 start-50 translate-middle">
             <div class="col-md-12"><a class="btn bgAzul px-5 btn-outline-light" href="feedAnimais.php">Adotar</a></div>
           </div>
-
         </div>
-
         <div class="col-md-6 d-flex justify-content-center"><img class="img-fluid d-block" height="600px" width="300px" src="https://imagensemoldes.com.br/wp-content/uploads/2020/04/cachorro-com-fundo-transparente.png"></div>
       </div>
     </div>
@@ -73,9 +68,7 @@
       </div>
     </div>
   </div>
-
-  <?php include 'footer.php';  ?>
-
+  <?php include 'App/views/footer.php';  ?>
 </body>
 
 </html>
