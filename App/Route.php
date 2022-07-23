@@ -1,24 +1,23 @@
 <?php
 
-    namespace App;
+namespace App;
 
-    class Route {
-        public function initRouter() {
-            $routes['index'] = array(
-                'route' => '/AUmor/public/',
-                'controller' => 'indexController',
-                'action' => 'index'
-            );
-            $routes['sobreNos'] = array(
-                'route' => '/AUmor/public/',
-                'controller' => 'indexController',
-                'action' => 'sobreNos'
-            );
-        }
-        
-        public function getUrl() {
-            return parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
-        }
+use MF\Init\Bootstrap;
+
+class Route extends Bootstrap{
+    protected function initRoutes() {
+        $routes['index'] = array(
+            'route' => '/AUmor/public/index',
+            'controller' => 'indexController',
+            'action' => 'index'
+        );
+
+        $routes['sobreNos'] = array(
+            'route' => '/AUmor/App/views/sobreNos',
+            'controller' => 'indexController',
+            'action' => 'sobreNos'
+        );
+
+        $this->setRoutes($routes);
     }
-
-?>
+}

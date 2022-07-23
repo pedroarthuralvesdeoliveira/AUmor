@@ -37,11 +37,10 @@
 
   require_once('../vendor/autoload.php');
   $route = new \App\Route;
-  print_r($route->getUrl());
 
   session_start();
 
-  require_once('../App/Views/header.php'); ?>
+  require_once('../App/views/header.php'); ?>
 
   <?php include 'menu.php'; ?>
 
