@@ -1,17 +1,18 @@
 <?php
-    require_once("../Model/endereco.class.php");
-    
-    class EnderecoDAO{
+    namespace App\DAO;
+    class EnderecoDAO
+    {
         private $db;
 
-		public function __construct(Database $db){
-
+		public function __construct(\Config\Database $db)
+        {
 			$this->db = $db;
-
         }
 
-        public function Inserir(Endereco $endereco){
-			try{
+        public function Inserir(\App\Models\Endereco $endereco)
+        {
+			try
+            {
                 $cep = $endereco->getCep();
                 $bairro = $endereco->getBairro();
                 $rua = $endereco->getRua();
@@ -28,39 +29,42 @@
                     ':numero' => $numero,
                     ':complemento' => $complemento
                 ));
-			} catch(PDOException $e){ 
+			} 
+            catch(\PDOException $e)
+            { 
 				echo 'Error: '.$e->getMessage();
             }
         }
         
-        public function Acessar(){
+        public function Acessar()
+        {
             $idEndereco = $_SESSION['idEndereco'];
-            try{ 
-                 
+            try
+            { 
                 $sql = "SELECT * from endereco WHERE idEndereco = :idEndereco "; 
                 $stmt = $this->db->getConnection()->prepare($sql);
-
                 $stmt->bindValue(':idEndereco', $idEndereco);
                 $stmt->execute();
-
-                $dados = $stmt->fetch(PDO::FETCH_OBJ);
-    
-            }catch (PDOException $e){
+                $dados = $stmt->fetch(\PDO::FETCH_OBJ);
+            }
+            catch (\PDOException $e)
+            {
                     echo "Erro: " . $e->getMessage();
             }
-                return $dados;
+            return $dados;
         }
         
-        public function Editar(Endereco $endereco){
+        public function Editar(\App\Models\Endereco $endereco)
+        {
             $idEndereco = $endereco->getIdEndereco();
             $cep = $endereco->getCep();
             $bairro = $endereco->getBairro();
             $rua = $endereco->getRua();
             $numero = $endereco->getNumero();
             $complemento = $endereco->getComplemento(); 
-			try {
+			try 
+            {
 				$stmt = $this->db->getConnection()->prepare('UPDATE endereco SET cep = :cep, bairro = :bairro, rua = :rua, numero = :numero, complemento = :complemento WHERE idEndereco = :idEndereco');
-			   
 				$stmt->execute(array(
                     ':idEndereco' => $idEndereco,
                     ':cep' => $cep, 
@@ -69,7 +73,9 @@
                     ':numero' => $numero,
                     ':complemento' => $complemento
 				));  
-			} catch(PDOException $e) {
+			} 
+            catch(\PDOException $e) 
+            {
 			  echo 'Error: ' . $e->getMessage();
 			}	
 		}

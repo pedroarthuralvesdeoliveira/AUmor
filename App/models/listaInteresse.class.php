@@ -1,5 +1,7 @@
 <?php
-    CLASS ListaInteresse{
+    namespace App\Models;
+    CLASS ListaInteresse
+    {
         private $idUsuario;
         private $idAnimal;
         private $dataInteresse;

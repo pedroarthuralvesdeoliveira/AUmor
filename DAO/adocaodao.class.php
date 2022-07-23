@@ -1,105 +1,115 @@
 <?php
-    require_once("../Model/adocao.class.php");
-    class AdocaoDAO {
-
+    namespace App\DAO;
+    class AdocaoDAO 
+    {
         private $db;
 
-		public function __construct(Database $db){
+		public function __construct(\config\Database $db)
+        {
 			$this->db = $db;
         }
 
-        public function Acessar(){
-            try{
-                    $result = array();
-
-                    $stmt = $this->db->getConnection()->prepare('SELECT * FROM adocao');
-
-                    $stmt->execute();
-
-                    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                    $result = $stmt->fetchAll();
-
-            }catch (PDOException $e){
-                    echo "Erro: " . $e->getMessage();
+        public function Acessar()
+        {
+            try
+            {
+                $result = array();
+                $stmt = $this->db->getConnection()->prepare('SELECT * FROM adocao');
+                $stmt->execute();
+                $result = $stmt->setFetchMode(\PDO::FETCH_ASSOC);
+                $result = $stmt->fetchAll();
+            }
+            catch (\PDOException $e)
+            {
+                echo "Erro: " . $e->getMessage();
             }
                 return $result;
         }
 
-        public function buscarAdocao($idUsuario, $idAnimal){
+        public function buscarAdocao($idUsuario, $idAnimal)
+        {
             $usuario = $idUsuario;
             $animal = $idAnimal; 
-
-            try {
+            try 
+            {
                 $sql = "SELECT idUsuarioFinal, idAnimal FROM adocao WHERE idUsuarioFinal = :usuario AND idAnimal = :animal AND status = 0";
                 $stmt = $this->db->getConnection()->prepare($sql);
                 $stmt->execute(array(
                     ':usuario' => $usuario,
                     ':animal' => $animal
                 ));
-
-                $dados = $stmt->fetch(PDO::FETCH_OBJ);
-            } catch (PDOException $e) {
+                $dados = $stmt->fetch(\PDO::FETCH_OBJ);
+            } 
+            catch (\PDOException $e) 
+            {
                 echo 'Error: '.$e->getMessage();
             }
                 return $dados;
         }
 
-        public function buscarNomeAnimal($id){
+        public function buscarNomeAnimal($id)
+        {
             $idAnimal = $id;
-            try {
+            try 
+            {
                 $sql = "SELECT nome from animal WHERE idAnimal = :idAnimal AND EXISTS (SELECT idAnimal FROM adocao WHERE idAnimal = :idAnimal)";
                 $stmt = $this->db->getConnection()->prepare($sql);
-
                 $stmt->bindValue(':idAnimal', $idAnimal);
                 $stmt->execute();
-
-                $dados = $stmt->fetch(PDO::FETCH_OBJ);
-
-            }catch (PDOException $e){
+                $dados = $stmt->fetch(\PDO::FETCH_OBJ);
+            }
+            catch (\PDOException $e)
+            {
                 echo "Erro: " . $e->getMessage();
             }
                 return $dados;
         }
     
-        public function dadosAdocao($idAnimal){
+        public function dadosAdocao($idAnimal)
+        {
             $animal = $idAnimal; 
-            try {
+            try 
+            {
                 $sql = "SELECT * FROM adocao WHERE idAnimal = :animal AND status = 0";
                 $stmt = $this->db->getConnection()->prepare($sql);
                 $stmt->execute(array(
                     ':animal' => $animal
                 ));
-
-                $dados = $stmt->fetch(PDO::FETCH_OBJ);
-            } catch (PDOException $e) {
+                $dados = $stmt->fetch(\PDO::FETCH_OBJ);
+            } 
+            catch (\PDOException $e) 
+            {
                 echo 'Error: '.$e->getMessage();
             }
                 return $dados;
         }
 
-        public function dadosDevolucao($idAnimal){
+        public function dadosDevolucao($idAnimal)
+        {
             $animal = $idAnimal; 
-            try {
+            try 
+            {
                 $sql = "SELECT a.*, b.* FROM adocao a,usuario b WHERE a.idAnimal = :animal AND a.idUsuarioFinal= b.idUsuario AND status = 1";
                 $stmt = $this->db->getConnection()->prepare($sql);
                 $stmt->execute(array(
                     ':animal' => $animal
                 ));
-
-                $dados = $stmt->fetchall(PDO::FETCH_ASSOC);
-
-            } catch (PDOException $e) {
+                $dados = $stmt->fetchall(\PDO::FETCH_ASSOC);
+            } 
+            catch (\PDOException $e) 
+            {
                 echo 'Error: '.$e->getMessage();
             }
                 return $dados;
         }
 
-        public function devolucaoAnimal($id, $status, Adocao $adocao){
+        public function devolucaoAnimal($id, $status, \App\Models\Adocao $adocao)
+        {
             $idAnimal = $id;
             $status = $status;
             $dataDevolucao = $adocao->getDataDevolucao();
-            try {
-
+            try 
+            {
                 $sql = "UPDATE adocao SET status = :status, dataDevolucao = :dataDevolucao WHERE idAnimal = :animal";
                 $stmt = $this->db->getConnection()->prepare($sql);
                 $stmt->execute(array(
@@ -107,36 +117,40 @@
                     ':status' => $status,
                     ':dataDevolucao' => $dataDevolucao
                 ));
-
-            } catch (PDOException $e) {
+            } 
+            catch (\PDOException $e) 
+            {
                 echo 'Error: '.$e->getMessage();
             }
         }
 
-        public function Editar(Adocao $result){
+        public function Editar(\App\Models\Adocao $result)
+        {
 		    $idAdocao = $result->getIdAdocao();
             $dataAdocao = $result->getDataAdocao();
             $dataDevolucao = $result->getDataDevolucao();
             $status = $result->getStatus();
-
-			try {
-
+			try 
+            {
 				$stmt = $this->db->getConnection()->prepare('UPDATE adocao SET dataAdocao = :dataAdocao, dataDevolucao = :dataDevolucao, status = :status WHERE idAdocao = :idAdocao');
-
-				 $stmt->execute(array(
+				$stmt->execute(array(
 					':idAdocao' => $idAdocao,
                     ':dataAdocao' => $dataAdocao,
                     ':dataDevolucao' => $dataDevolucao,
                     ':status' => $status
 				));
 
-			} catch(PDOException $e) {
+			} 
+            catch(\PDOException $e) 
+            {
 			  echo 'Error: ' . $e->getMessage();
             }
 		}
 
-        public function Inserir($id, $idA){
-            try{
+        public function Inserir($id, $idA)
+        {
+            try
+            {
                 $idUsuario = $id;
                 $idAnimal = $idA;
 
@@ -147,7 +161,9 @@
                     ':idUsuario' => $idUsuario,
                     ':idAnimal' => $idAnimal,
                 ));
-            } catch(PDOException $e){
+            } 
+            catch(\PDOException $e)
+            {
                 echo 'Error: '.$e->getMessage();
             }
         }   

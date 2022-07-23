@@ -1,6 +1,7 @@
 <?php
-    class Adocao{
-        
+    namespace App\Models;
+    class Adocao
+    {    
         private $idAdocao;
         private $idUsuario;
         private $idAnimal;
@@ -73,6 +74,5 @@
         public function setIdUsuarioFinal($idUsuarioFinal){
             $this->idUsuarioFinal = $idUsuarioFinal;
         }
-
     }
 ?> 

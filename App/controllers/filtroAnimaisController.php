@@ -20,7 +20,7 @@ if ((isset($_POST['tipo'])) && (!empty($_POST['tipo'])) && ($_POST['tipo'] != 't
 }
 
 $animal = new AnimalController(); 
-$acessarAnimais = $animal->FiltrarAnimais($porte, $sexo, $tipo);
+$acessarAnimais = $animal->filtrarAnimais($porte, $sexo, $tipo);
 $resultado = "";
 
 if(!empty($acessarAnimais)){

@@ -1,9 +1,8 @@
 <?php
 
+namespace App\Controllers;
+
 session_start();
-require_once('../Config/database.class.php');
-require_once('../Model/usuario.class.php');
-require_once('../DAO/usuariodao.class.php');
 
 class UsuarioController
 {

@@ -1,30 +1,34 @@
 <?php
-    require_once "../Model/listaInteresse.class.php";
-
-    CLASS ListaInteresseDAO{
-        
+    namespace App\DAO;
+    CLASS ListaInteresseDAO
+    {    
         private $db;
 
-		public function __construct(Database $db){
+		public function __construct(\Config\Database $db)
+        {
 			$this->db = $db;
         }
 
-        public function Acessar(){
+        public function Acessar()
+        {
             $resultado = array();
             try
             {
                 $sql = "SELECT * from listainteresse";
                 $stmt = $this->db->getConnection()->prepare($sql);
                 $stmt->execute();
-                $resultado = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $resultado = $stmt->setFetchMode(\PDO::FETCH_ASSOC);
                 $resultado = $stmt->fetchAll();
-            } catch (PDOException $e){
+            } 
+            catch (\PDOException $e)
+            {
                 echo "Erro: " . $e->getMessage();
             }
-                return $resultado;
+            return $resultado;
         }
 
-        public function AdicionarUsuarioEmListaInteresse($idUsuario, $idAnimal){
+        public function AdicionarUsuarioEmListaInteresse($idUsuario, $idAnimal)
+        {
             $idAdotante = $idUsuario;
             $idPet = $idAnimal;
             try
@@ -36,15 +40,17 @@
                     ':idAdotante' => $idAdotante,
                     ':idPet' => $idPet
                 ));
-            } catch (PDOException $e){
+            } 
+            catch (\PDOException $e)
+            {
                 echo "Erro: " . $e->getMessage();
             }
         }
 
-        public function ApagarUsuariodaLista($usuario, $animal){
+        public function ApagarUsuariodaLista($usuario, $animal)
+        {
             $idUsuario = $usuario;
             $idAnimal = $animal;
-
             try 
             {
                 $Pdo = $this->db->getConnection();
@@ -54,12 +60,15 @@
                     ':idUsuario' => $idUsuario,
                     ':idAnimal' => $idAnimal
                 ));
-            } catch (PDOException $e) {
+            } 
+            catch (\PDOException $e) 
+            {
                 echo "Erro: " . $e->getMessage();
             }
         }
 
-        public function buscarLista($id){
+        public function buscarLista($id)
+        {
             $idAnimal = $id;
             try 
             {
@@ -67,14 +76,17 @@
                 $stmt = $this->db->getConnection()->prepare($sql);
                 $stmt->bindValue(':idAnimal', $idAnimal);
                 $stmt->execute();
-                $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            }catch (PDOException $e){
+                $dados = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            }
+            catch (\PDOException $e)
+            {
                 echo "Erro: " . $e->getMessage();
             }
-                return $dados;
+            return $dados;
         }
 
-        public function buscarNomeAnimal($id){
+        public function buscarNomeAnimal($id)
+        {
             $idAnimal = $id;
             try 
             {
@@ -82,49 +94,52 @@
                 $stmt = $this->db->getConnection()->prepare($sql);
                 $stmt->bindValue(':idAnimal', $idAnimal);
                 $stmt->execute();
-                $dados = $stmt->fetch(PDO::FETCH_OBJ);
-
-            }catch (PDOException $e){
+                $dados = $stmt->fetch(\PDO::FETCH_OBJ);
+            }
+            catch (\PDOException $e)
+            {
                 echo "Erro: " . $e->getMessage();
             }
                 return $dados;
         }
 
-        public function buscarUsuario($id){
+        public function buscarUsuario($id)
+        {
             $idUsuario = $id;
-            try {
+            try 
+            {
                 $sql = "SELECT * from listainteresse WHERE idUsuario = :idUsuario";
                 $stmt = $this->db->getConnection()->prepare($sql);
                 $stmt->bindValue(':idUsuario', $idUsuario);
                 $stmt->execute();
-                $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            }catch (PDOException $e){
+                $dados = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            }
+            catch (\PDOException $e)
+            {
                 echo "Erro: " . $e->getMessage();
             }
                 return $dados;
         }
 
-        public function buscarUsuarioAnimalLista($usuario, $animal){
+        public function buscarUsuarioAnimalLista($usuario, $animal)
+        {
             $idUsuario = $usuario;
             $idAnimal = $animal;
-
-            try {
+            try 
+            {
                 $Pdo = $this->db->getConnection();
                 $sql = 'SELECT idUsuario, idAnimal FROM listainteresse WHERE idUsuario = :idUsuario AND idAnimal = :idAnimal';
                 $stmt = $Pdo->prepare($sql);
-
                 $stmt->execute(array(
                     ':idUsuario' => $idUsuario,
                     ':idAnimal' => $idAnimal
                 ));
-
-                $dados = $stmt->fetch(PDO::FETCH_OBJ);
-
-            } catch (PDOException $e) {
+                $dados = $stmt->fetch(\PDO::FETCH_OBJ);
+            } 
+            catch (\PDOException $e) 
+            {
                 echo "Erro: " . $e->getMessage();
             }
             return $dados;
         }
 }
-?>

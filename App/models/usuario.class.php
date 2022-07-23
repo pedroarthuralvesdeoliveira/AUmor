@@ -1,5 +1,7 @@
 <?php
-    class Usuario{
+    namespace App\Models;
+    class Usuario
+    {
         private $idUsuario;
         private $nome;
         private $sobrenome;
@@ -15,6 +17,7 @@
         private $descricao;
         
         private $idEndereco;
+        
         public function getIdEndereco() {
             return $this->idEndereco;
         }
@@ -127,4 +130,3 @@
             $this->descricao = $descricao;
         }
     }
-?>

@@ -1,6 +1,7 @@
 <?php
-    class Animal {
-
+    namespace App\Models;
+    class Animal 
+    {
         private $idAnimal;
         private $idUsuario;
         private $nome;

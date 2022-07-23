@@ -1,8 +1,6 @@
 <?php
 
-require_once('../Model/adocao.class.php');
-require_once('../DAO/adocaodao.class.php');
-require_once('../Config/database.class.php');
+namespace App\Controllers;
 
 class AdocaoController
 {
@@ -11,8 +9,8 @@ class AdocaoController
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
 
-		$db = new Database();
-		$dao = new AdocaoDAO($db);
+		$db = new \config\Database();
+		$dao = new \Dao\AdocaoDAO($db);
 		
 		if (isset($_GET["idAnimal"])) {
             return $dao->dadosAdocao($_GET["idAnimal"]);

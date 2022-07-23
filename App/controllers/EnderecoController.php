@@ -1,8 +1,6 @@
 <?php
 
-require_once('../Model/endereco.class.php');
-require_once('../DAO/enderecodao.class.php');
-require_once('../Config/database.class.php');
+namespace App\Controllers;
 
 class EnderecoController
 {

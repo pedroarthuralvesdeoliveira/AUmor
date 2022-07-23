@@ -1,7 +1,6 @@
 <?php
 
-require_once('../Config/database.class.php');
-require_once('../DAO/animaldao.class.php');
+namespace App\Controllers;
 
 class AnimalController
 {
@@ -10,8 +9,8 @@ class AnimalController
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
 
-		$db = new Database();
-		$dao = new AnimalDAO($db);
+		$db = new \config\Database();
+		$dao = new \Dao\AnimalDAO($db);
 		$animal = new Animal();
 		
 		if (isset($_SESSION['idUsuario'])) {
@@ -179,7 +178,7 @@ class AnimalController
         echo "Falha no envio do email.";
     }
 
-	public function FiltrarAnimais($porte, $sexo, $tipo){
+	public function filtrarAnimais($porte, $sexo, $tipo){
 		try{
 			$db = new Database();
 			$dao = new AnimalDAO($db);

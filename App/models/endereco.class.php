@@ -1,7 +1,7 @@
 <?php 
-
-    class Endereco{
-
+    namespace App\Models;
+    class Endereco
+    {
         private $idEndereco;
         private $cep;
         private $bairro;
@@ -57,5 +57,4 @@
             $this->complemento = $complemento;
         }
     }
-
-?> 
+?>

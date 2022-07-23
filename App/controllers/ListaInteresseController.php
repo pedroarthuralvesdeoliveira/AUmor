@@ -1,8 +1,6 @@
 <?php
 
-require_once('../Model/ListaInteresse.class.php');
-require_once('../DAO/listaInteressedao.class.php');
-require_once('../Config/database.class.php');
+namespace App\Controllers;
 
 class ListaInteresseController
 {
@@ -11,7 +9,7 @@ class ListaInteresseController
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
 
-		$db = new Database();
+		$db = new \config\Database();
 		$dao = new ListaInteresseDAO($db);
 
 		return $dao->Acessar();

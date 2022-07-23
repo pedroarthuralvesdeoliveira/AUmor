@@ -1,13 +1,15 @@
 <?php
-    require_once("../Model/usuario.class.php");
+    namespace App\DAO;
     class UsuarioDAO
     {
         private $db;
-		public function __construct(Database $db){
+		public function __construct(\Config\Database $db)
+        {
 			$this->db = $db;
         }
 
-        public function Acessar(){
+        public function Acessar()
+        {
             $idUsuario = $_SESSION['idUsuario'];
             try
             {
@@ -15,14 +17,16 @@
                 $stmt = $this->db->getConnection()->prepare($sql);
                 $stmt->bindValue(':idUsuario', $idUsuario);
                 $stmt->execute();
-                $dados = $stmt->fetch(PDO::FETCH_OBJ);
-            } catch (PDOException $e){
+                $dados = $stmt->fetch(\PDO::FETCH_OBJ);
+            } catch (\PDOException $e)
+            {
                     echo "Erro: " . $e->getMessage();
             }
             return $dados;
         }
 
-        public function AcessarNome($id){
+        public function AcessarNome($id)
+        {
             $idUsuario = $id;
             try
             {
@@ -30,35 +34,37 @@
                 $stmt = $this->db->getConnection()->prepare($sql);
                 $stmt->bindValue(':idUsuario', $idUsuario);
                 $stmt->execute();
-                $dados = $stmt->fetch(PDO::FETCH_ASSOC);
-            }catch (PDOException $e){
+                $dados = $stmt->fetch(\PDO::FETCH_ASSOC);
+            }
+            catch (\PDOException $e)
+            {
                 echo "Erro: " . $e->getMessage();
             }
             return $dados;
         }
 
-        public function buscaUsuario($id){
-
+        public function buscaUsuario($id)
+        {
             $idUsuario = $id;
-
             try 
             {
                 $sql = "SELECT * from usuario WHERE idUsuario = :idUsuario";
                 $stmt = $this->db->getConnection()->prepare($sql);
                 $stmt->bindValue(':idUsuario', $idUsuario);
                 $stmt->execute();
-
-                $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            } catch (PDOException $e){
+                $dados = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            } 
+            catch (\PDOException $e)
+            {
                 echo "Erro: " . $e->getMessage();
             }
             return $dados;
         }
 
-        public function buscarDonoAnimal($idAnimal, $idUsuario){
+        public function buscarDonoAnimal($idAnimal, $idUsuario)
+        {
             $usuario = $idUsuario;
             $animal = $idAnimal;
-
             try
             {
                 $sql = "SELECT email FROM usuario WHERE idUsuario = :usuario AND :usuario IN (SELECT idUsuario FROM animal WHERE idUsuario = :usuario AND idAnimal = :animal)";
@@ -67,14 +73,17 @@
                     ':usuario' => $usuario,
                     ':animal' => $animal
                 ));
-                $dados = $stmt->fetch(PDO::FETCH_OBJ);
-            }catch (PDOException $e){
+                $dados = $stmt->fetch(\PDO::FETCH_OBJ);
+            }
+            catch (\PDOException $e)
+            {
                 echo "Erro: " . $e->getMessage();
             }   
             return $dados;
         }
 
-        public function dadosUsuarioFinal($idAnimal, $idUsuario){
+        public function dadosUsuarioFinal($idAnimal, $idUsuario)
+        {
             $usuario = $idUsuario;
             $animal = $idAnimal;
             try 
@@ -85,29 +94,33 @@
                     ':usuario' => $usuario,
                     ':animal' => $animal
                 ));
-                $dados = $stmt->fetch(PDO::FETCH_OBJ);
-            }catch (PDOException $e){
+                $dados = $stmt->fetch(\PDO::FETCH_OBJ);
+            }catch (\PDOException $e){
                 echo "Erro: " . $e->getMessage();
             }   
             return $dados;
         }
 
-        public function Desativar($id){
+        public function Desativar($id)
+        {
             $idUsuario = $id;
             $status = 0;
-    			try 
-                {
-                    $stmt = $this->db->getConnection()->prepare('UPDATE usuario SET StatusDesativar = :status WHERE idUsuario = :idUsuario');
-                    $stmt->execute(array(
-                        ':idUsuario' => $idUsuario,
-                        ':status' => $status,
-    				));
-    			} catch(PDOException $e) {
-    			    echo 'Error: ' . $e->getMessage();
-    			}
+    		try 
+            {
+                $stmt = $this->db->getConnection()->prepare('UPDATE usuario SET StatusDesativar = :status WHERE idUsuario = :idUsuario');
+                $stmt->execute(array(
+                    ':idUsuario' => $idUsuario,
+                    ':status' => $status,
+    			));
+    		} 
+            catch(\PDOException $e) 
+            {
+    			echo 'Error: ' . $e->getMessage();
+    		}
         }
 
-        public function EsqueceuSenha(Usuario $usuario){
+        public function EsqueceuSenha(\App\Models\Usuario $usuario)
+        {
             $email = $usuario->getEmail();
             try 
             {
@@ -116,14 +129,17 @@
                 $stmt->execute(array(
                     ':email' => $email
                 ));
-                $dados = $stmt->fetch(PDO::FETCH_OBJ);
-            } catch(PDOException $e) {
+                $dados = $stmt->fetch(\PDO::FETCH_OBJ);
+            } 
+            catch(\PDOException $e) 
+            {
                 echo 'Error: ' . $e->getMessage();
             }
             return $dados;
         }
 
-        public function Editar(Usuario $usuario){
+        public function Editar(\App\Models\Usuario $usuario)
+        {
             $idUsuario = $usuario->getIdUsuario();
             $nome = $usuario->getNome();
             $sobrenome = $usuario->getSobrenome();
@@ -139,14 +155,15 @@
                     ':telefone' => $telefone,
                     ':descricao' => $descricao,
                 ));
-
-            } catch(PDOException $e) {
+            } 
+            catch(\PDOException $e) 
+            {
               echo 'Error: ' . $e->getMessage();
             }
         }
 
-        public function EditarFoto(Usuario $usuario){
-
+        public function EditarFoto(\App\Models\Usuario $usuario)
+        {
             $idUsuario = $usuario->getIdUsuario();
             $imagem = $usuario->getImagem();
             try 
@@ -155,12 +172,15 @@
                 $stmt->bindValue(':imagem', $imagem);
                 $stmt->bindValue(':idUsuario', $idUsuario);
                 $stmt->execute();
-            } catch(PDOException $e) {
+            } 
+            catch(\PDOException $e) 
+            {
                 echo 'Error: ' . $e->getMessage();
             }
         }
 
-        public function Inserir(Usuario $usuario){
+        public function Inserir(\App\Models\Usuario $usuario)
+        {
             try
             {
                 $nome = $usuario->getNome();
@@ -195,16 +215,17 @@
                     ':imagem' => $imagem,
                     ':descricao' => $descricao,
                 ));
-
                 return $Pdo->lastInsertId();
                 return $email;
-
-            } catch(PDOException $e){
+            } 
+            catch(\PDOException $e)
+            {
                 echo 'Error: '.$e->getMessage();
             }
         }
 
-        public function Login(Usuario $usuario){
+        public function Login(\App\Models\Usuario $usuario)
+        {
             try
             {
                 $email = $usuario->getEmail();
@@ -229,7 +250,7 @@
 
                 if ($query->rowCount() > 0) 
                 {
-                    $dados = $query->fetch(PDO::FETCH_OBJ);
+                    $dados = $query->fetch(\PDO::FETCH_OBJ);
                     session_start();
                     $_SESSION['idUsuario'] = $dados->idUsuario;
                     $_SESSION['idEndereco'] = $dados->idEndereco;
@@ -251,12 +272,15 @@
                         header('Location: ../View/perfilUsuarioAdmin.php');
                     }
                 } 
-            }catch (PDOException $e){
+            }
+            catch (\PDOException $e)
+            {
                 echo "Erro: " . $e->getMessage();
             }
         }
 
-        public function validarEmail($id, $email){
+        public function validarEmail($id, $email)
+        {
             try
             {
                 $Pdo = $this->db->getConnection();
@@ -268,12 +292,15 @@
                     ':email' => $email
                 ));
 
-            } catch(PDOException $e){
+            } 
+            catch(\PDOException $e)
+            {
                 echo 'Error: '.$e->getMessage();
             }    
         }
 
-        public function verificaEmail($emailUsuario){
+        public function verificaEmail($emailUsuario)
+        {
             $email = $emailUsuario;
             try
             {
@@ -291,12 +318,15 @@
                 if ($stmt->rowCount() > 0){
                     return true;
                 }
-            } catch(PDOException $e){
+            } 
+            catch(\PDOException $e)
+            {
                 echo 'Error: '.$e->getMessage();
             }
         }
 
-        public function verificaRg($rgUsuario){
+        public function verificaRg($rgUsuario)
+        {
             $rg = $rgUsuario;
             try
             {
@@ -318,7 +348,9 @@
                     return true;
                 }else{
                 }
-            } catch(PDOException $e){
+            } 
+            catch(\PDOException $e)
+            {
                 echo 'Error: '.$e->getMessage();
             }
         }
